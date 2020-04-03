@@ -1,0 +1,44 @@
+body {
+    background : #d0ffd0 ;
+    }
+
+#hidden-html {
+    display: none ;
+    }
+
+
+/* pour simplifier et faire comme bootstrap */
+.ligne {
+    display: flex ;
+    flex-wrap: wrap ;
+    }
+
+/* le conteneur des images a une taille fixe */
+.trou {
+    position: relative ;
+    display: inline-block ;
+    box-sizing : content-box ;
+    width : 180px ;
+    height: 134px ;
+
+    /* pour etre bien vu sur la page de test */
+    margin: 10px ;
+    background : #a0eea0 ;
+    overflow: hidden ;
+    border: 1px solid #006600 ;
+    }
+
+/* le conteneur des images a une taille fixe */
+.trou img {
+    display: block ;
+    position: absolute ;
+    top: 0 ; left : 0 ;
+    z-index: 20 ;
+    }
+
+/* pour etre sur de la superpostion des images */
+.trou img.step0 { z-index: 10 ; } 
+
+/* la ligne test, les animations se font au survol de la souris */
+.anim { visibility: hidden ; }
+.trou .anim-show { visibility: visible ; }
