@@ -11,7 +11,7 @@ $(function () {
   // instance de trou
   creerTrou = function (id) {
     var _id = id, _actif = false, _pas, _nb = _id.find(".anim").length,
-      _pas_courant, _Anime, _Avance;
+      _pas_courant, _Anime, _Avance, _Stoppe;
 
     _Anime = function () {
       if (!_actif) {
@@ -34,9 +34,19 @@ $(function () {
       }
     };
 
+    _Stoppe = function () {
+      if (_actif) {
+        _actif = false;
+        if (_pas_courant) {
+          _pas_courant.removeClass("anim-show");
+        }
+      }
+    };
+
     return {
       anime: function () { _Anime(); },
-      avance: function () { _Avance(); }
+      avance: function () { _Avance(); },
+      stoppe: function () { _Stoppe(); }
     };
   };
 
@@ -64,14 +74,13 @@ $(function () {
       if (_compteur % 60 === 0) {
         _trou[2].anime();
       }
-      _trou.forEach(function (trou) {
-        trou.avance();
-      });
+      _trou.forEach(function (trou) { trou.avance(); });
     };
 
     _Demarre = function () {
       if (!_tourne) {
         _tourne = true;
+        _compteur = 0;
         _timer = window.setInterval(function () { _Avance(); }, $INTERVAL);
       }
     };
@@ -80,6 +89,7 @@ $(function () {
       if (_tourne) {
         _tourne = false;
         window.clearInterval(_timer);
+        _trou.forEach(function (trou) { trou.stoppe(); });
       }
     };
 
